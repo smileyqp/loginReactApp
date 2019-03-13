@@ -34,3 +34,8 @@ npm install react-router-dom --save</br>
 </br>
 6、安装axios用于post数据</br>
 npm install axios</br>
+
+
+7、在全局的安装 npm install body-parser --save
+
+8、在client的package.json中添加 "proxy": "http://localhost:6060"
