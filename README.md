@@ -44,7 +44,6 @@ npm install react-router-dom --save
 npm install axios
 ```
 
-</br>
 7、在全局的安装body-parser</br>
 
 ```shell
@@ -58,41 +57,42 @@ import bodyParser from 'body-parser';
 app.use(bodyParser.json());
 ```
 
-</br>
-</br>
 8、在client的package.json中添加 "proxy": "http://localhost:6060"</br>
 
 </br>
 9.注意clone下来之后在整个项目目录下面添加.babelrc文件，里面加上</br>
+
+```shell
 {
     "presets": ["env"]
 }
-</br></br>
+```
 
 10、用于做表单前段过滤验证的js库</br>
 https://github.com/chriso/validator.js</br>
-整个项目安装validator库</br>
+整个项目安装validator库
 
 ```shell
 npm install validator --save
 ```
 
-</br>
-</br>
 11.整个项目下安装lodash库</br>
+
 ```shell
 npm install lodash --save
 ```
-</br>
+
 12.此点结合10和11；主要是怎样进行为空错误处理</br>
 后端接收前台传过来的请求；对应的URL定位到register的</br>
 </br>
-13.整个项目安装classnames库；来解决表单错误提示时候是否明显问题；即作用为，动态改变控制节点的className属性来改变其样式(见signupForm中实例)</br>
+13.整个项目安装classnames库；来解决表单错误提示时候是否明显问题；即作用为，动态改变控制节点的className属性来改变其样式(见signupForm中实例)
+
 ```shell
 npm install classnames
 import classnames from 'classnames';
 className={classnames('form-control',{'is-invalid':errors.username})}
 ```
+
 解释：is-invalid这个className的值是errors.username;当errors.username存在时候为true这个clasName存在；当errors.username不存在，那么这个is-invalid也是为false不显示的</br>
 
 ## 缕清整个项目前后台数据交互方式
