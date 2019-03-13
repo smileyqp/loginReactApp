@@ -31,34 +31,36 @@ npm install nodemon --save-dev</br>
 引入bootstrap，在index.html中
 <link href="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet"></br>
 bootstrap用到的样式网址：https://getbootstrap.com/docs/4.3/examples/navbars/</br>
-</br>
-</br>
+
 5、添加引入路由的库</br>
+
 ```shell
 npm install react-router-dom --save
 ```
 
-</br>
-</br>
 6、安装axios用于post数据</br>
+
 ```shell
 npm install axios
 ```
 
 </br>
 7、在全局的安装body-parser</br>
+
 ```shell
 npm install body-parser --save
 ```
+
 并在server中的index中引用body-parser</br>
+
 ```shell
 import bodyParser from 'body-parser';
 app.use(bodyParser.json());
 ```
+
 </br>
 </br>
 8、在client的package.json中添加 "proxy": "http://localhost:6060"</br>
-
 
 </br>
 9.注意clone下来之后在整个项目目录下面添加.babelrc文件，里面加上</br>
@@ -70,9 +72,11 @@ app.use(bodyParser.json());
 10、用于做表单前段过滤验证的js库</br>
 https://github.com/chriso/validator.js</br>
 整个项目安装validator库</br>
+
 ```shell
 npm install validator --save
 ```
+
 </br>
 </br>
 11.整个项目下安装lodash库</br>
@@ -104,6 +108,7 @@ className={classnames('form-control',{'is-invalid':errors.username})}
 * 后台在整个项目安装bodyParser(路径解析)；以及babel(ES6语法解析)；并进行引用，在index页面引用bodyParser；</br>
 * 在server的index中进行路径解析；判断前端传过来的是请求哪一个路径的；并进行匹配；例如此处进行请求的路由为/api/users；那么index中为app.use('/api/users',users);对应的users进入users.js中进行继续匹配</br>
 * 匹配到users.js中之后，查看请求类型；此案例中请求的类型为post；那么对应users.js中为(注意；users.js中的路由；虽然是'/'但是其实其根目录是相对于/api/users而言；并且users.js中还可以有其他的请求方法以及请求路径；详情见users.js中注释部分)</br>
+
 ```shell
 router.post('/',(req,res)=>{
     //console.log(req.body);
@@ -113,15 +118,19 @@ router.post('/',(req,res)=>{
     }
 });
 ```
+
 * 此案例中接下来进行的部分是前台传过来的表单state进行是否为空验证;安装validator，validator是一个用于表单验证的第三方库；安装lodash用其中的isEmpty方法(详情见users.js中)；此时整个后台就可以对传过来的表单数据进行验证，如果为空就可以将错误信息传给前台</br>
-* 前台signupForm.js中的submit中的一个dispath的axio方法有then方法；then方法是一个request成功之后获得返回数据的一个方法：</br>
+* 前台signupForm.js中的submit中的一个dispath的axio方法有then方法；then方法是一个request成功之后获得返回数据的一个方法：
+
 ```shell
 this.props.userSignupRequest(this.state).then(
     () => {},
     ({response}) => {this.setState({errors:response.data,isLoading:false})}
 );
 ```
+
 * 然后在获得数据中将这个返回的errors放进state中；然后在render中获得errors渲染在页面上(isLoading是放置重复提交；前一个errors.username用于判断是否显示后面的，有显示没有不显示)</br>
+
 ```shell
 const {errors} = this.state;//提取错误信息
 {errors.username && <span className='form-text form-muted'>{errors.username}</span>} 
