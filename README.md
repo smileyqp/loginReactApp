@@ -66,6 +66,5 @@ https://github.com/chriso/validator.js</br>
 npm install validator --save</br>
 </br>
 </br>
-
 11.整个项目下安装lodash库</br>
 npm install lodash --save</br>
