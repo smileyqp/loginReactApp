@@ -2,7 +2,6 @@
 在server中开启的命令：npm start；这个是直接在整个项目下进行npm start命令便可</br>
 因为配置了： "start": "nodemon --watch server --exec babel-node -- server/index.js"</br>
 nodemon是为了前段刷新时候实时刷新不用重启的一个配置</br>
-
 </br></br>
 
 1、在整个项目目录下</br>
