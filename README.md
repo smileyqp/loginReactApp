@@ -67,3 +67,31 @@ npm install validator --save</br>
 </br>
 11.整个项目下安装lodash库</br>
 npm install lodash --save</br>
+
+12.此点结合10和11；主要是怎样进行为空错误处理
+后端接收前台传过来的请求；对应的URL定位到register的
+
+
+
+13.缕清前后台数据交互方式
+### 前台请求发送部分
+*  在SignupForm中。用state对象存储username、email、password、passwordConfirm等信息
+* 在其form表单中将value值设置成this.state.username等；让state中的对象实时与state保持一致（注意别忘记添加onchangeFunction;因为react中的是唯一数据源）
+* 在SignupForm表单中的form中添加onSubmit={this.onSubmit}这个function；并且这个function是触发了action为userSignupRequest（这个function是带参数为当时表单穿进去的数据的state对象）的function;这个userSignupRequest的function是在SignupPage中的时直接引用进来之后通过SignupForm组件传给SignupForm的
+* 在SignupActions中的userSignupRequest方法引入了axios用于dispatch数据；比如此处是进行post数据给后台；此时dispatch也是带了当时传进来的数据state；dispatch之后带的两个参数分别为请求路径以及请求数据axios.post('/api/users',userData)
+* 到了次部前台基本流程结束；不过在json中添加一个响应代理服务器；当前是加上后台响应的localhost:6060
+* 此时前台发送请求就基本结束
+
+### 后台接收请求部分
+* 后台在整个项目安装bodyParser(路径解析)；以及babel(ES6语法解析)；并进行引用，在index页面引用bodyParser；
+* 在server的index中进行路径解析；判断前端传过来的是请求哪一个路径的；并进行匹配；例如此处进行请求的路由为/api/users；那么index中为app.use('/api/users',users);对应的users进入users.js中进行继续匹配
+* 匹配到users.js中之后，查看请求类型；此案例中请求的类型为post；那么对应users.js中为(注意；users.js中的路由；虽然是'/'但是其实其根目录是相对于/api/users而言；并且users.js中还可以有其他的请求方法以及请求路径；详情见users.js中注释部分)
+router.post('/',(req,res)=>{
+    //console.log(req.body);
+    const {errors,isValid} = validateInput(req.body);
+    if(!isValid){
+        res.status(400).json(errors);
+    }
+});
+
+* 此案例中接下来进行的部分是前台传过来的表单state进行是否为空验证

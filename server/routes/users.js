@@ -4,20 +4,21 @@ import validator from 'validator'
 let router = express.Router();
 
 
-
+//判断请求信息是否为空的函数
+//此处data为前段请求所带过来的一串的数据
 const validateInput=(data)=>{
-    let errors ={};
+    let errors ={};//errors设置成空的对象
     if (validator.isEmpty(data.username)){
         errors.username = 'The field is required!';
     }
     if (validator.isEmpty(data.email)){
-        errors.username = 'The field is required!';
+        errors.email = 'The field is required!';
     }
     if (validator.isEmpty(data.password)){
-        errors.username = 'The field is required!';
+        errors.password = 'The field is required!';
     }
     if (validator.isEmpty(data.passwordConfirmation)){
-        errors.username = 'The field is required!';
+        errors.passwordConfirmation = 'The field is required!';
     }
     return {
         errors,//存放一些错误信息；如果errors为空，那么验证通过
@@ -28,7 +29,7 @@ const validateInput=(data)=>{
 
 router.post('/',(req,res)=>{
     //console.log(req.body);
-    const {error,isValid} = validateInput(req.body);
+    const {errors,isValid} = validateInput(req.body);
     if(!isValid){
         res.status(400).json(errors);
     }
