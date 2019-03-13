@@ -113,7 +113,7 @@ className={classnames('form-control',{'is-invalid':errors.username})}
 router.post('/',(req,res)=>{
     //console.log(req.body);
     const {errors,isValid} = validateInput(req.body);
-    if(!isValid){</br>
+    if(!isValid){
         res.status(400).json(errors);
     }
 });
