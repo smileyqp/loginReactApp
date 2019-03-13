@@ -6,10 +6,13 @@ nodemon是为了前段刷新时候实时刷新不用重启的一个配置</br>
 
 1、在整个项目目录下</br>
 创建server和client两个包分别放置server和前端代码；</br>
-整个项目根目录下执行下面两个创建json目录进行项目初始化以及安装express框架</br>
+整个项目根目录下执行下面两个创建json目录进行项目初始化以及安装express框架
+
+```shell
 npm init -y</br>
-npm install express --save</br>
-</br>
+npm install express --save
+```
+
 2、如何解决ES6语法转化问题？</br>
 安装babel;babel是用于ES6语法解析,babel网址：https://babel.bootcss.com/</br>
 npm install --save-dev babel-cli babel-preset-env</br>
