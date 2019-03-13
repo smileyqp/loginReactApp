@@ -103,12 +103,12 @@ className={classnames('form-control',{'is-invalid':errors.username})}
 <SignupForm history={this.props.history} userSignupRequest={this.props.userSignupRequest}/>
 //signupForm中,在form表单请求返回中，返回成功的话就push定位到上一个历史记录即login等界面
 this.props.userSignupRequest(this.state).then(
-            () => {
-                this.props.history.push('/');
-            },
-            ({response}) => {
-                this.setState({errors:response.data,isLoading:false})}
-        );
+    () => {
+        this.props.history.push('/');
+    },
+    ({response}) => {
+        this.setState({errors:response.data,isLoading:false})}
+);
 ```
 
 方法二:SignupForm中直接引入withRouter；然后再在导出的时候使用withRouter这个方法
@@ -117,6 +117,25 @@ this.props.userSignupRequest(this.state).then(
 import {withRouter} from 'react-router-dom';
 
 export default withRouter(SignupForm);
+
+//push部分的代码不变
+this.props.userSignupRequest(this.state).then(
+    () => {
+        this.props.history.push('/');
+    },
+    ({response}) => {
+        this.setState({errors:response.data,isLoading:false})}
+);
+```
+
+方法三：取出上下文
+
+```shell
+import PropTypes from 'prop-types';
+
+static propTypes = {
+    router:PropTypes.object
+}
 ```
 
 ## 缕清整个项目前后台数据交互方式
