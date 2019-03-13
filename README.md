@@ -95,7 +95,8 @@ className={classnames('form-control',{'is-invalid':errors.username})}
 
 解释：is-invalid这个className的值是errors.username;当errors.username存在时候为true这个clasName存在；当errors.username不存在，那么这个is-invalid也是为false不显示的</br>
 
-14、做注册跳转：方法一是直接通过其父组件拿到其history的属性；然后push到上一个页面即
+14、做注册跳转：</br>
+方法一:是直接通过其父组件拿到其history的属性；然后push到上一个页面即:
 
 ```shell
 //signupPage中
@@ -108,6 +109,14 @@ this.props.userSignupRequest(this.state).then(
             ({response}) => {
                 this.setState({errors:response.data,isLoading:false})}
         );
+```
+
+方法二:SignupForm中直接引入withRouter；然后再在导出的时候使用withRouter这个方法
+
+```shell
+import {withRouter} from 'react-router-dom';
+
+export default withRouter(SignupForm);
 ```
 
 ## 缕清整个项目前后台数据交互方式
