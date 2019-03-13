@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": " nodemon --watch server --exec babel-node -- server/index.js"
+    "start": "nodemon --watch server --exec babel-node -- server/index.js"
   },
   "repository": {
     "type": "git",
@@ -19,7 +19,9 @@
   "homepage": "https://github.com/smileyqp/redux_loginRegister_frame#readme",
   "dependencies": {
     "body-parser": "^1.18.3",
-    "express": "^4.16.4"
+    "express": "^4.16.4",
+    "lodash": "^4.17.11",
+    "validator": "^10.11.0"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",

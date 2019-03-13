@@ -1,3 +1,10 @@
+注意：client中开启的命令为：npm start</br>
+在server中开启的命令：npm start；这个是直接在整个项目下进行npm start命令便可</br>
+因为配置了： "start": "nodemon --watch server --exec babel-node -- server/index.js"</br>
+nodemon是为了前段刷新时候实时刷新不用重启的一个配置</br>
+
+</br></br>
+
 1、在整个项目目录下</br>
 创建server和client两个包分别放置server和前端代码；</br>
 整个项目根目录下执行下面两个创建json目录进行项目初始化以及安装express框架</br>
@@ -35,7 +42,30 @@ npm install react-router-dom --save</br>
 6、安装axios用于post数据</br>
 npm install axios</br>
 
+</br>
+7、在全局的安装body-parser</br>
+npm install body-parser --save</br>
+并在server中的index中引用body-parser</br>
+import bodyParser from 'body-parser';</br>
+app.use(bodyParser.json());</br>
+</br>
+</br>
+8、在client的package.json中添加 "proxy": "http://localhost:6060"</br>
 
-7、在全局的安装 npm install body-parser --save
 
-8、在client的package.json中添加 "proxy": "http://localhost:6060"
+</br>
+9.注意clone下来之后在整个项目目录下面添加.babelrc文件，里面加上</br>
+{
+    "presets": ["env"]
+}
+</br></br>
+
+10、用于做表单前段过滤验证的js库</br>
+https://github.com/chriso/validator.js</br>
+整个项目安装validator库</br>
+npm install validator --save</br>
+</br>
+</br>
+
+11.整个项目下安装lodash库</br>
+npm install lodash --save</br>
