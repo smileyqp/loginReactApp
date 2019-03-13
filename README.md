@@ -104,6 +104,6 @@ this.props.userSignupRequest(this.state).then(</br>
     () => {},</br>
     ({response}) => {this.setState({errors:response.data,isLoading:false})}</br>
 );</br>
-然后在获得数据中将这个返回的errors放进state中；然后在render中获得errors渲染在页面上(isLoading是放置重复提交；前一个errors.username用于判断是否显示后面的，有显示没有不显示)</br>
+* 然后在获得数据中将这个返回的errors放进state中；然后在render中获得errors渲染在页面上(isLoading是放置重复提交；前一个errors.username用于判断是否显示后面的，有显示没有不显示)</br>
 const {errors} = this.state;//提取错误信息</br>
 {errors.username && <span className='form-text form-muted'>{errors.username}</span>}  </br>
