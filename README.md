@@ -90,6 +90,7 @@ className={classnames('form-control',{'is-invalid':errors.username})}</br>
 * 后台在整个项目安装bodyParser(路径解析)；以及babel(ES6语法解析)；并进行引用，在index页面引用bodyParser；</br>
 * 在server的index中进行路径解析；判断前端传过来的是请求哪一个路径的；并进行匹配；例如此处进行请求的路由为/api/users；那么index中为app.use('/api/users',users);对应的users进入users.js中进行继续匹配</br>
 * 匹配到users.js中之后，查看请求类型；此案例中请求的类型为post；那么对应users.js中为(注意；users.js中的路由；虽然是'/'但是其实其根目录是相对于/api/users而言；并且users.js中还可以有其他的请求方法以及请求路径；详情见users.js中注释部分)</br>
+```shell
 router.post('/',(req,res)=>{</br>
     //console.log(req.body);</br>
     const {errors,isValid} = validateInput(req.body);</br>
@@ -97,12 +98,17 @@ router.post('/',(req,res)=>{</br>
         res.status(400).json(errors);</br>
     }</br>
 });</br>
+```
 * 此案例中接下来进行的部分是前台传过来的表单state进行是否为空验证;安装validator，validator是一个用于表单验证的第三方库；安装lodash用其中的isEmpty方法(详情见users.js中)；此时整个后台就可以对传过来的表单数据进行验证，如果为空就可以将错误信息传给前台</br>
 * 前台signupForm.js中的submit中的一个dispath的axio方法有then方法；then方法是一个request成功之后获得返回数据的一个方法：</br>
-this.props.userSignupRequest(this.state).then(</br>
+```shell
+this.props.userSignupRequest(this.state).then(
     () => {},</br>
-    ({response}) => {this.setState({errors:response.data,isLoading:false})}</br>
-);</br>
+    ({response}) => {this.setState({errors:response.data,isLoading:false})}
+);
+```
 * 然后在获得数据中将这个返回的errors放进state中；然后在render中获得errors渲染在页面上(isLoading是放置重复提交；前一个errors.username用于判断是否显示后面的，有显示没有不显示)</br>
-const {errors} = this.state;//提取错误信息</br>
-{errors.username && <span className='form-text form-muted'>{errors.username}</span>}  </br>
+```shell
+const {errors} = this.state;//提取错误信息
+{errors.username && <span className='form-text form-muted'>{errors.username}</span>} 
+```
