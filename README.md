@@ -73,7 +73,7 @@ npm install lodash --save</br>
 
 
 
-## 13.缕清前后台数据交互方式
+## 13.缕清整个项目前后台数据交互方式
 ### 前台请求发送部分
 *  在SignupForm中。用state对象存储username、email、password、passwordConfirm等信息
 * 在其form表单中将value值设置成this.state.username等；让state中的对象实时与state保持一致（注意别忘记添加onchangeFunction;因为react中的是唯一数据源）
