@@ -71,9 +71,13 @@ npm install lodash --save</br>
 12.此点结合10和11；主要是怎样进行为空错误处理
 后端接收前台传过来的请求；对应的URL定位到register的
 
+13.整个项目安装classnames库；来解决表单错误提示时候是否明显问题；即作用为，动态改变控制节点的className属性来改变其样式(见signupForm中实例)
+npm install classnames
+import classnames from 'classnames';
+className={classnames('form-control',{'is-invalid':errors.username})}
+解释：is-invalid这个className的值是errors.username;当errors.username存在时候为true这个clasName存在；当errors.username不存在，那么这个is-invalid也是为false不显示的
 
-
-## 13.缕清整个项目前后台数据交互方式
+## 缕清整个项目前后台数据交互方式
 ### 前台请求发送部分
 *  在SignupForm中。用state对象存储username、email、password、passwordConfirm等信息
 * 在其form表单中将value值设置成this.state.username等；让state中的对象实时与state保持一致（注意别忘记添加onchangeFunction;因为react中的是唯一数据源）
@@ -94,4 +98,4 @@ router.post('/',(req,res)=>{
     }
 });
 
-* 此案例中接下来进行的部分是前台传过来的表单state进行是否为空验证
+* 此案例中接下来进行的部分是前台传过来的表单state进行是否为空验证;安装validator，validator是一个用于表单验证的第三方库；安装lodash用其中的isEmpty方法(详情见users.js中)；此时整个后台就可以对传过来的表单数据进行验证，如果为空就可以将错误信息传给前台
