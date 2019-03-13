@@ -30,5 +30,7 @@ bootstrap用到的样式网址：https://getbootstrap.com/docs/4.3/examples/navb
 5、添加引入路由的库</br>
 npm install react-router-dom --save</br>
 
-
-
+</br>
+</br>
+6、安装axios用于post数据</br>
+npm install axios</br>

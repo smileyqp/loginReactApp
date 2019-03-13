@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import PropTypes from 'prop-types';
 
 class SignupPage extends Component {
     constructor(props){
@@ -12,12 +12,17 @@ class SignupPage extends Component {
         }
     }
 
+    static propTypes = {
+        userSignupRequest:PropTypes.func.isRequired
+    }
     onChange = (e) =>{
         this.setState({[e.target.name]:e.target.value});
     }
     onSubmit = (e) =>{
         e.preventDefault();
-        console.log(this.state);
+        // console.log(this.state);
+        // axios.POST('/api/users',{users:this.state});
+        this.props.userSignupRequest(this.state);//userSignupRequest就是axios请求
     }
 
   render() {
@@ -39,16 +44,8 @@ class SignupPage extends Component {
             </div>
             <div className='form-group'>
                 <label className='control-label'>password Confirmation</label>
-                <input value={this.state.passwordConfirmation} type='text' name='passwordConfirmation'className='form-control' onChange={this.onChange}/>
+                <input value={this.state.passwordConfirmation} type='password' name='passwordConfirmation'className='form-control' onChange={this.onChange}/>
             </div>
-
-
-
-
-                
-                
-
-
 
 
 
