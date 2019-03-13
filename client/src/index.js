@@ -10,7 +10,7 @@ import thunk from 'redux-thunk';
 
 //引入路由模块
 import {BrowserRouter as Router} from 'react-router-dom';
-import routes from './routers';
+import routes from './routes';
 
 import {createStore,applyMiddleware} from 'redux';
 import rootReducers from './reducers';

@@ -12,7 +12,7 @@ const validateInput=(data)=>{
     if (validator.isEmpty(data.username)){
         errors.username = 'The field is required!';
     }
-    if (!validator.isEmail(data.email)){//为啥相反啊；不知道emmm
+    if (!validator.isEmail(data.email)){//注意此处相反
         errors.email = 'Email is invalid!';
     }
     if (validator.isEmpty(data.password)){
@@ -35,7 +35,9 @@ router.post('/',(req,res)=>{
     // setTimeout(()=>{},500);
     //console.log(req.body);
     const {errors,isValid} = validateInput(req.body);
-    if(!isValid){
+    if(isValid){
+        res.json({success:true});
+    }else{
         res.status(400).json(errors);//传给前台错误信息
     }
 });

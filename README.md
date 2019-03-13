@@ -95,6 +95,21 @@ className={classnames('form-control',{'is-invalid':errors.username})}
 
 解释：is-invalid这个className的值是errors.username;当errors.username存在时候为true这个clasName存在；当errors.username不存在，那么这个is-invalid也是为false不显示的</br>
 
+14、做注册跳转：方法一是直接通过其父组件拿到其history的属性；然后push到上一个页面即
+
+```shell
+//signupPage中
+<SignupForm history={this.props.history} userSignupRequest={this.props.userSignupRequest}/>
+//signupForm中,在form表单请求返回中，返回成功的话就push定位到上一个历史记录即login等界面
+this.props.userSignupRequest(this.state).then(
+            () => {
+                this.props.history.push('/');
+            },
+            ({response}) => {
+                this.setState({errors:response.data,isLoading:false})}
+        );
+```
+
 ## 缕清整个项目前后台数据交互方式
 ### 前台请求发送部分
 *  在SignupForm中。用state对象存储username、email、password、passwordConfirm等信息</br>

@@ -27,7 +27,10 @@ class SignupPage extends Component {
         //console.log(this.state);
         // axios.POST('/api/users',{users:this.state});
         this.props.userSignupRequest(this.state).then(//userSignupRequest就是axios请求;也是一个方法;axios有then方法是请求成功之后才会触发的函数
-            () => {},//后台返回的200多的状态吗一般会进入到这里面；400多的一般会进入到下面
+            () => { //后台返回的200多的状态吗一般会进入到这里面(成功返回这里面)；400多的一般会进入到下面
+                //console.log(this.props);下面的是从props中去除历史返回到上一个页面即登录页面；这个props的history属性是福组件signupPage传过来的
+                this.props.history.push('/');
+            },
             ({response}) => {this.setState({errors:response.data,isLoading:false})}//此处返回的是错误数据errors；当提交表单时候,如果有errors返回那么form的state数据中多了一个errors数据，此时可以用state中的errors数据给到页面对用户进行提示
             //(data) => {console.dir(data)}
         );
