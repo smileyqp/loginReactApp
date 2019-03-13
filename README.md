@@ -97,7 +97,6 @@ router.post('/',(req,res)=>{</br>
         res.status(400).json(errors);</br>
     }</br>
 });</br>
-</br>
 * 此案例中接下来进行的部分是前台传过来的表单state进行是否为空验证;安装validator，validator是一个用于表单验证的第三方库；安装lodash用其中的isEmpty方法(详情见users.js中)；此时整个后台就可以对传过来的表单数据进行验证，如果为空就可以将错误信息传给前台</br>
 * 前台signupForm.js中的submit中的一个dispath的axio方法有then方法；then方法是一个request成功之后获得返回数据的一个方法：</br>
 this.props.userSignupRequest(this.state).then(</br>
