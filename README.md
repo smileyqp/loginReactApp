@@ -295,6 +295,8 @@ onclick时间响应deleteFlashMessage这个action；
 action响应后reducer监听到了DELETE_FLASH_MESSAGE这个type；
 之后进行删除操作
 
+![Image text](https://github.com/smileyqp/loginReactApp/blob/master/README_PIC/delete.png)
+
 ```shell
 export const deleteFlashMessage = (id) => {
     return {
