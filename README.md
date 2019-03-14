@@ -288,6 +288,33 @@ onSubmit = (e) =>{
 
 ```
 
+##### 关于flash删除按钮
+flashMessage中添加btn并且添加onClick事件；
+deleteFlashMessage在flashMessage的父组件中引入；
+onclick时间响应deleteFlashMessage这个action；
+action响应后reducer监听到了DELETE_FLASH_MESSAGE这个type；
+之后进行删除操作
+
+```shell
+export const deleteFlashMessage = (id) => {
+    return {
+        type:DELETE_FLASH_MESSAGE,
+        id
+    }
+}
+```
+
+```shell
+ case DELETE_FLASH_MESSAGE:
+    const index = findIndex(state,{id:action.id})//fliter方法，找出所在记录；找出它在数组state中的位置
+    if(index >= 0){     //找不到是返回-1
+        return[
+            ...state.slice(0,index),
+            ...state.slice(index+1)
+        ]
+    }
+    return state;//没有找到返回原来的state
+```
 
 ## 缕清整个项目前后台数据交互方式
 ### 前台请求发送部分

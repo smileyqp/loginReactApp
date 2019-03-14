@@ -11,7 +11,7 @@ class FlashMessageList extends Component {
         deleteFlashMessage:PropTypes.func.isRequired
     }
     render(){
-        const messages = this.props.messages.map(message =>//这里的messages是一个数组，用数组的map方法取出 
+        const messages = this.props.messages.map(message =>//这里的messages是一个数组(纠正是一个object)，用map方法取出 
             <FlashMessage key = {message.id} deleteFlashMessage = {this.props.deleteFlashMessage} message = {message}/>//里面的message={message}是将这个参数传给子组件中所用
         );
         
