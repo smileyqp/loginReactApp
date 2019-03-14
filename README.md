@@ -373,7 +373,7 @@ psql
 \du                 列出所有用户
 ```
 
-#### 16、knex.js
+#### 17、knex.js
 为数据库提供统一个接口以及提供强大的查询功能
 https://github.com/tgriesser/knex
 
@@ -403,6 +403,36 @@ psql yq//进入数据库
 
 
 ![Image text](https://github.com/smileyqp/loginReactApp/blob/master/README_PIC/yqdb_table.png)
+
+##### 18.bookshelf(A simple Node.js ORM for PostgreSQL, MySQL and SQLite3 built on top of Knex.js )
+bookshelf是一个基于knex的一个简单的node.js对象关系映射;ORM(object relational mapping)用于实现面向对象编程语言里的不同类型数据之间的转换;实际上就是将数据库里面的内容映射到代码中来
+https://github.com/bookshelf/bookshelf
+
+```shell
+npm install bookshelf --save
+```
+
+
+#### 19、node.bcrypt.js广泛使用的一个加密的库
+https://github.com/kelektiv/node.bcrypt.js
+
+```shell
+//安装bcrypt
+npm install bcrypt --save
+//具体使用见server/routes/users.js
+import bcrypt from 'bcrypt';
+
+const password_digest = bcrypt.hashSync(password,10);
+```
+
+```shell
+//数据库中查看用户注册信息
+psql yq                 //进入yq数据库
+select * from users;    //查看users中的所有数据
+```
+
+![Image text](https://github.com/smileyqp/loginReactApp/blob/master/README_PIC/registed_data.png)
+
 
 ## 缕清整个项目前后台数据交互方式
 ### 前台请求发送部分

@@ -1,6 +1,9 @@
 import express from 'express';
 import isEmpty from 'lodash/isEmpty';
 import validator from 'validator'
+import User from '../models/user';
+import bcrypt from 'bcrypt';
+
 let router = express.Router();
 
 
@@ -36,7 +39,17 @@ router.post('/',(req,res)=>{
     //console.log(req.body);
     const {errors,isValid} = validateInput(req.body);
     if(isValid){
-        res.json({success:true});
+        const {username,password,email} = req.body;
+        const password_digest = bcrypt.hashSync(password,10);//用bcrypt加密,哈希加密并且长度为10
+
+        //保存进数据库中
+        User.forge({
+            username,password_digest,email
+        },{hashTimeStamps:true}).save()//hashTimeStamps为true是时间戳要存储起来
+        .then(user => res.json({success:true}))//成功返回一个user
+        .catch(err => res.status(500).json({errors:err}))//失败返回一个状态码500
+
+        // res.json({success:true});
     }else{
         res.status(400).json(errors);//传给前台错误信息
     }
