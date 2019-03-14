@@ -179,7 +179,7 @@ case ADD_FLASH_MEASSAGE:
     ]
 ```
 
-flash实现的具体流程：
+##### flash实现的具体流程：
 
 ```shell
 //reducer中添加flashMessage;并在reducer中的index中引入；这样在state中便可以用flashMessage获得
