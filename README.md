@@ -279,7 +279,7 @@ onSubmit = (e) =>{
             this.props.addFlashMessage({
                 type:'success',
                 text:'You signed up successfully.Welcome!'
-            });      
+            });
             this.props.history.push('/');
         },
         ({response}) => {this.setState({errors:response.data,isLoading:false})}
@@ -289,11 +289,11 @@ onSubmit = (e) =>{
 ```
 
 ##### 关于flash删除按钮
-flashMessage中添加btn并且添加onClick事件；
-deleteFlashMessage在flashMessage的父组件中引入；
-onclick时间响应deleteFlashMessage这个action；
-action响应后reducer监听到了DELETE_FLASH_MESSAGE这个type；
-之后进行删除操作
+flashMessage中添加btn并且添加onClick事件；</br>
+deleteFlashMessage在flashMessage的父组件中引入；</br>
+onclick时间响应deleteFlashMessage这个action；</br>
+action响应后reducer监听到了DELETE_FLASH_MESSAGE这个type；</br>
+之后进行删除操作;</br>
 
 ![Image text](https://github.com/smileyqp/loginReactApp/blob/master/README_PIC/delete.png)
 
