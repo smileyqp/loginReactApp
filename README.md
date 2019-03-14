@@ -318,7 +318,7 @@ export const deleteFlashMessage = (id) => {
     return state;//没有找到返回原来的state
 ```
 
-#### 15、安装postgresql
+#### 16、安装postgresql
 
 ```shell
 //安装postgresql
@@ -391,7 +391,18 @@ npm install pg --save(如果是mysql数据库的话：npm install mysql --save)
 knex migrate:make users
 //执行最近的migrations，即创建表；knex --help可以查看knex的一些操作命令
 knex migrate:latest
+//这里面实在yq用户有的yq数据库下面创建了users表；查看users表方法
+psql yq//进入数据库
+\d     //查看数据库中的表
+\d users //查看users表中的列值
 ```
+
+![Image text](https://github.com/smileyqp/loginReactApp/blob/master/README_PIC/yqDb.png)
+
+![Image text](https://github.com/smileyqp/loginReactApp/blob/master/README_PIC/yqdb_knex_table.png)
+
+
+![Image text](https://github.com/smileyqp/loginReactApp/blob/master/README_PIC/yqdb_table.png)
 
 ## 缕清整个项目前后台数据交互方式
 ### 前台请求发送部分
