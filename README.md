@@ -80,7 +80,6 @@ app.use(bodyParser.json());
 
 #### 8、在client的package.json中添加 "proxy": "http://localhost:6060"</br>
 
-</br>
 #### 9.注意clone下来之后在整个项目目录下面添加.babelrc文件，里面加上</br>
 
 ```shell
