@@ -6,6 +6,7 @@
     "axios": "^0.18.0",
     "body-parser": "^1.18.3",
     "logger": "0.0.1",
+    "postgresql": "0.0.1",
     "react": "^16.8.4",
     "react-dom": "^16.8.4",
     "react-redux": "^6.0.1",

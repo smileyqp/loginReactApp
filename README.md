@@ -318,6 +318,50 @@ export const deleteFlashMessage = (id) => {
     return state;//没有找到返回原来的state
 ```
 
+#### 15、安装postgresql
+
+```shell
+//安装postgresql
+sudo npm install postgresql
+//重启postgresql
+sudo service postgresql restart
+//进入postgresql数据库之中
+sudo su postgres -c psql postgresql
+//开启服务
+service postgresql start
+//关闭服务
+service postgresql stop
+//设置开机自启动
+chkconfig --add postgresql
+//进入数据库密码yqp1314520
+sudo su postgres
+//数据库操作
+createdb redux      //创建数据库
+psql -l             //罗列出所有的数据库
+
+psql postgres       //连接到数据库中su postgres -c psql postgresql
+create database reduxtest//另外一种方法创建数据库
+
+
+----------------------------
+sudo su - postgres
+//创建数据库
+createdb reduxlogin
+//进入数据库
+postgres@yq-System-Product-Name:~$ psql reduxlogin
+\d 显示所有的表
+
+进入命令行中
+psql
+create database reduxnew;
+\l 显示所有数据库（psql -l）
+\q 退出
+
+```
+
+#### 16、knex.js
+https://github.com/tgriesser/knex
+
 ## 缕清整个项目前后台数据交互方式
 ### 前台请求发送部分
 *  在SignupForm中。用state对象存储username、email、password、passwordConfirm等信息</br>
