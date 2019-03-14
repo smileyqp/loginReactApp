@@ -155,6 +155,25 @@ static propTypes = {
 }
 ```
 
+15、添加flash
+在client中安装shortid这个库,这个库是用来生成唯一的随机数，保证唯一性（详情使用见reducer中的flashMessage.js中）
+
+```shell
+npm install shortid --save
+
+import shortid from 'shortid';
+
+case ADD_FLASH_MEASSAGE:
+    return [
+        ...state,//原来的state
+        {
+            id:shortid.generate(),//shortid是查询随机数保证它唯一的
+            type:action.message.type,
+            text:action.message.text
+        }
+    ]
+```
+
 ## 缕清整个项目前后台数据交互方式
 ### 前台请求发送部分
 *  在SignupForm中。用state对象存储username、email、password、passwordConfirm等信息</br>

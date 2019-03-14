@@ -21,7 +21,8 @@ class SignupForm extends Component {
     //     router:PropTypes.object
     // }
     static propTypes = {
-        userSignupRequest:PropTypes.func.isRequired
+        userSignupRequest:PropTypes.func.isRequired,
+        addFlashMessage:PropTypes.func.isRequired//addFlashMessage是从reducer中传过来的；这里是进行验证
     }
     onChange = (e) =>{
         this.setState({[e.target.name]:e.target.value});
@@ -33,6 +34,10 @@ class SignupForm extends Component {
         // axios.POST('/api/users',{users:this.state});
         this.props.userSignupRequest(this.state).then(//userSignupRequest就是axios请求;也是一个方法;axios有then方法是请求成功之后才会触发的函数
             () => { //后台返回的200多的状态吗一般会进入到这里面(成功返回这里面)；400多的一般会进入到下面
+                this.props.addFlashMessage({//addFlashMessage是从reducer中传递过来的；然后从其父级组件传过来
+                    type:'success',
+                    text:'You signed up successfully.Welcome!'
+                });
                 //console.log(this.props);这是第一种方法从父组件获取history;下面的是从props中去除历史返回到上一个页面即登录页面；这个props的history属性是福组件signupPage传过来的
                 this.props.history.push('/');//第一而终方法返回上次的history目录这里都是这样写的；这里的逻辑是注册完之后返回上一层页面即登录界面
                 //this.context.router.history.push('/');这是第三种方法获取context;context里面有router以及router下面有history

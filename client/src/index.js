@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import NavigationBar from './components/NavigationBar';
+import FlashMessageList from './components/flash/FlashMessageList'
 import * as serviceWorker from './serviceWorker';
 
 
@@ -30,6 +31,7 @@ ReactDOM.render(
         <Router>
             <div>
             <NavigationBar />
+            <FlashMessageList />
             {routes}
             </div>
         </Router>
