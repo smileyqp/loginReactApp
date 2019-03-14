@@ -1,5 +1,6 @@
-import {ADD_FLASH_MEASSAGE} from '../constants';
+import {ADD_FLASH_MEASSAGE,DELETE_FLASH_MESSAGE} from '../constants';
 import shortid from 'shortid';
+import findIndex from 'lodash/findIndex';
 
 const flashMessages = (state = [],action = {}) => {
     switch(action.type){
@@ -12,6 +13,15 @@ const flashMessages = (state = [],action = {}) => {
                     text:action.message.text
                 }
             ]
+        case DELETE_FLASH_MESSAGE:
+            const index = findIndex(state,{id:action.id})//fliter方法，找出所在记录；找出它在数组state中的位置
+            if(index >= 0){     //找不到是返回-1
+                return[
+                    ...state.slice(0,index),
+                    ...state.slice(index+1)
+                ]
+            }
+            return state;//没有找到返回原来的state
         default: return state;
     }
 }
