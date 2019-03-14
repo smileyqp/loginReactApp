@@ -1,5 +1,5 @@
 
-# react&redux+node.js+postgreSQL实现登录认证系统
+# React&Redux+node.js+postgreSQL实现登录认证系统
 
 注意：client中开启的命令为：npm start</br>
 在server中开启的命令：npm start；这个是直接在整个项目下进行npm start命令便可</br>
