@@ -349,18 +349,49 @@ sudo su - postgres
 createdb reduxlogin
 //进入数据库
 postgres@yq-System-Product-Name:~$ psql reduxlogin
-\d 显示所有的表
 
-进入命令行中
+
+-------------------------------
+基本常用操作
+su - postgres
 psql
-create database reduxnew;
-\l 显示所有数据库（psql -l）
-\q 退出
+默认用户postgres的密码为yqp1314520
+创建了新用户的用户名:smileyqp,密码：yqp1314520(CREATE USER smileyqp WITH PASSWORD 'yqp1314520';)创建新用户yq密码123456数据库yq(psql -U yq -d yq -W进入)
+创建新用户所有权限的数据库smileyqpDb(CREATE DATABASE smileyqpDb OWNER smileyqp;)
 
+
+常用的控制台命令
+\password           设置密码
+\q                  退出
+\h                  查看SQL命令的解释，比如\h select
+\?                  查看psql命令列表
+\l                  列出所有数据库
+\c [database_name]  连接其他数据库
+\d                  列出当前数据库的所有表格
+\d [table_name]     列出某一张表格的结构
+\x                  对数据做展开操作
+\du                 列出所有用户
 ```
 
 #### 16、knex.js
+为数据库提供统一个接口以及提供强大的查询功能
 https://github.com/tgriesser/knex
+
+```shell
+//在整个项目中安装knex
+npm install knex --save
+//安装knex的命令
+sudo npm install -g knex
+//初始化,会生成knexfile.js整个初始化配置文件
+knex init
+//整个项目中安装
+npm install pg --save(如果是mysql数据库的话：npm install mysql --save)
+
+//创建migrations中的一个文件；这里面的是进行创建表的操作
+knex migrate:make users
+//执行最近的migrations，即创建表；knex --help可以查看knex的一些操作命令
+knex migrate:latest
+```
 
 ## 缕清整个项目前后台数据交互方式
 ### 前台请求发送部分
