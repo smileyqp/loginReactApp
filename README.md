@@ -97,10 +97,12 @@ https://github.com/chriso/validator.js</br>
 npm install validator --save
 ```
 
-#### 11.整个项目下安装lodash库</br>
+#### 11.整个项目下安装lodash库(安装lodash用其中的isEmpty方法(详情见users.js中))</br>
 
 ```shell
 npm install lodash --save
+
+import isEmpty from 'lodash/isEmpty';
 ```
 
 #### 12.此点结合10和11；主要是怎样进行为空错误处理</br>
