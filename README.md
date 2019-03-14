@@ -179,6 +179,115 @@ case ADD_FLASH_MEASSAGE:
     ]
 ```
 
+flash实现的具体流程：
+
+```shell
+//reducer中添加flashMessage;并在reducer中的index中引入；这样在state中便可以用flashMessage获得
+import {ADD_FLASH_MEASSAGE} from '../constants';
+import shortid from 'shortid';
+
+const flashMessages = (state = [],action = {}) => {
+    switch(action.type){
+        case ADD_FLASH_MEASSAGE:
+            return [
+                ...state,//原来的state
+                {
+                    id:shortid.generate(),//shortid是查询随机数保证它唯一的
+                    type:action.message.type,
+                    text:action.message.text
+                }
+            ]
+        default: return state;
+    }
+}
+
+export default flashMessages;
+```
+
+```shell
+//action中添加addFlashMessage这个function
+import {ADD_FLASH_MEASSAGE} from '../constants';
+
+export const addFlashMessage = (message) => {
+    return {
+        type:ADD_FLASH_MEASSAGE,
+        message
+    }
+}
+```
+
+```shell
+组件FlashMessageList中，用connect连接，并且用mapStateToProps取得flashMessage的state
+//这个是返回reducer中的flashMessages;将state传过来；并在组件中用propTypes取得冰川个子组件flashMessage
+class FlashMessageList extends Component {
+    static propTypes = {
+        messages:PropTypes.array.isRequired//从reducer中的flashMessages中得知传过来的messages是一个数组
+    }
+    render(){
+        const messages = this.props.messages.map(message =>
+            <FlashMessage key = {message.id} message = {message}/>
+        );
+        return(
+            <div className='container'>
+                {messages}
+            </div>
+        );
+    }
+}
+
+const mapStateToProps = (state) => {
+    return {
+        messages:state.flashMessages
+    }
+}
+
+export default connect(mapStateToProps)(FlashMessageList); 
+```
+
+```shell
+//子组件获得值并用classnames进行判断显示
+class FlashMessage extends Component {
+    static propTypes = {
+        message:PropTypes.array.isRequired//验证传过来父组件中传过来的message
+    }
+    render(){
+        const {id,type,text} = this.props.message;
+        return(
+            <div className={classnames('alert',{
+                'alert-success':type === 'success',
+                'alert-danger':type === 'danger'
+            })}>
+            {text}
+
+            </div>
+        );
+    }
+}
+
+export default FlashMessage; 
+
+```
+
+```shell
+//并且在signupForm中数据成功返回时候，触发了addFlashMessage这个action反悔了type以及text
+onSubmit = (e) =>{
+    e.preventDefault();
+    this.setState({errors:{},isLoading:true});
+    this.props.userSignupRequest(this.state).then(
+        () => {
+            this.props.addFlashMessage({
+                type:'success',
+                text:'You signed up successfully.Welcome!'
+            });      
+            this.props.history.push('/');
+        },
+        ({response}) => {this.setState({errors:response.data,isLoading:false})}
+    );
+}
+
+```
+
+
 ## 缕清整个项目前后台数据交互方式
 ### 前台请求发送部分
 *  在SignupForm中。用state对象存储username、email、password、passwordConfirm等信息</br>
