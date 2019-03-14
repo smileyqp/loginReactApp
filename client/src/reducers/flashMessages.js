@@ -14,11 +14,11 @@ const flashMessages = (state = [],action = {}) => {
                 }
             ]
         case DELETE_FLASH_MESSAGE:
-            const index = findIndex(state,{id:action.id})//fliter方法，找出所在记录；找出它在数组state中的位置
+            const index = findIndex(state,{id:action.id})//fliter方法，找出所在记录；找出它在数组state中的位置;这个是找出要删除元素的一个索引位置
             if(index >= 0){     //找不到是返回-1
                 return[
-                    ...state.slice(0,index),
-                    ...state.slice(index+1)
+                    ...state.slice(0,index),//0到index，但是不包括这个index
+                    ...state.slice(index+1)//index+1包括index+1以及后面的所有部分；slice方法slice(start,end),其结果是返回一个新的数组；这个中的做法就是在state中返回一个新的数组中，新的数组删除了index这个元素
                 ]
             }
             return state;//没有找到返回原来的state
