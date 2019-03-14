@@ -45,7 +45,7 @@ router.post('/',(req,res)=>{
         //保存进数据库中
         User.forge({
             username,password_digest,email
-        },{hashTimeStamps:true}).save()//hashTimeStamps为true是时间戳要存储起来
+        },{hasTimestamps:true}).save()//hasTimestamps为true是时间戳要存储起来
         .then(user => res.json({success:true}))//成功返回一个user
         .catch(err => res.status(500).json({errors:err}))//失败返回一个状态码500
 
