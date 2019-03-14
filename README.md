@@ -1,3 +1,6 @@
+
+# react&redux+node.js+postgreSQL实现登录认证系统
+
 注意：client中开启的命令为：npm start</br>
 在server中开启的命令：npm start；这个是直接在整个项目下进行npm start命令便可</br>
 因为配置了：
@@ -8,6 +11,7 @@
 
 nodemon是为了前端刷新时候实时刷新不用重启的一个配置</br>
 </br>
+![Image text](https://github.com/smileyqp/loginReactApp/blob/master/README_PIC/login.png)
 
 1、在整个项目目录下</br>
 创建server和client两个包分别放置server和前端代码；</br>
@@ -157,6 +161,7 @@ static propTypes = {
 
 15、添加flash
 在client中安装shortid这个库,这个库是用来生成唯一的随机数，保证唯一性（详情使用见reducer中的flashMessage.js中）
+![Image text](https://github.com/smileyqp/loginReactApp/blob/master/README_PIC/flashmessage.png)
 
 ```shell
 npm install shortid --save
