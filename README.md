@@ -498,7 +498,7 @@ session是保存在服务器端的(注意session也是可以用cookie来存储�
 第一次登陆时候,服务器就响应一些信息比如说cookies;
 cookies是有长度限制的以及在分布式应用中有局限性的;
 简单理解就是cookies是浏览器的数据库;
-本地数据库有很多种,比如说本地存储Local Storage
+本地数据库有很多种,比如说本地存储Local Storage(local Storage是与网址相对应的,每个网址都有相对应的localstorage)
 jwt可以用cookie存储也可以用local storage来存储
 
 * 一般而言就是cookies和session相互配合:
@@ -516,6 +516,8 @@ token就是一个串,是在服务器中加密的,根据秘钥进行对称加密;
 
 
 #### 23.jwt(json web token;具体使用见server/rouites/auth.js)
+jwt详细介绍https://www.cnblogs.com/java-jun-world2099/p/9146143.html
+jwt由三部分组成header,payload,signature(头部,载荷和签名)
 
 ```shell
 //安装

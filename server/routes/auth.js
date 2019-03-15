@@ -21,6 +21,7 @@ router.post('/',(req,res)=>{
                     id:user.get('id'),
                     username:user.get('username')
                 },config.jwtSecret);//config.jwtSecret这个是一个秘钥,相当于密码是对其进行签名用的;这个知识一个字符串,但是这个字符串是保密的;这个config上面有导入;这个config在server目录下的config.js
+                res.json({token});//token响应给浏览器;然后在action的loginAction中对响应请求进行处理
             }else{
                 res.status(401).json({errors:{form:'Invalid Credentials!Password is wrong!'}});//密码不匹配时候返回
             }
