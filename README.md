@@ -450,6 +450,8 @@ import Promise from 'bluebird';
 
 ![Image text](https://github.com/smileyqp/loginReactApp/blob/master/README_PIC/onBlur.png)
 
+![Image text](https://github.com/smileyqp/loginReactApp/blob/master/README_PIC/onBlur_new.png)
+
 ## 缕清整个项目前后台数据交互方式
 ### 前台请求发送部分
 *  在SignupForm中。用state对象存储username、email、password、passwordConfirm等信息</br>
