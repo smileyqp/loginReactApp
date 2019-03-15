@@ -10,7 +10,7 @@ let router = express.Router();
 
 //判断请求信息是否为空的函数
 //此处data为前段请求所带过来的一串的数据
-//commonValidateInput此处是验证用户输入内容;包括是否为空,邮箱是否合法,密码和确认密码是否相同
+//commonValidateInput此处是验证用户输入内容;包括是否为空,邮箱是否合法,密码和确认密码是否相同  
 const commonValidateInput=(data)=>{
     console.log(data);
     let errors ={};//errors设置成空的对象
