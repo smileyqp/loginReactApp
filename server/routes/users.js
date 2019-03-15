@@ -1,6 +1,6 @@
 import express from 'express';
 import isEmpty from 'lodash/isEmpty';
-import validator from 'validator'
+import validator from 'validator';
 import User from '../models/user';
 import bcrypt from 'bcrypt';
 //import Promise from 'bluebird';
