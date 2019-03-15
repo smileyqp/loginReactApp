@@ -436,6 +436,7 @@ select * from users;    //查看users中的所有数据
 
 
 #### 20.重复用户名邮件的时候返回给用户提示(详情见server/routes/user.js;以及可以对照dev分支上的修改前的源码)
+![Image text](https://github.com/smileyqp/loginReactApp/blob/master/README_PIC/repeated.png)
 
 ```shell
 //引入Promise的库

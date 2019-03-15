@@ -40,7 +40,7 @@ const validateInput = (data,otherValidations)=>{
     let {errors} = otherValidations(data);//这里是将commonValidateInput返回的errors传给这个errors;但是此处并没有将isValid这个变量传过来;是因为之后要到数据库中进行验证是否有重复;但是这两个isValid怎样进行和并呢???请待下回分解
     return Promise.all([
         User.where({email:data.email}).fetch().then(user => {
-            if(user){errors.email = 'The user with such email! '}
+            if(user){errors.email = 'The email is existed! '}
         }),
         User.where({username:data.username}).fetch().then(user => {
             if(user){errors.username = 'The username is existed! '}
