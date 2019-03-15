@@ -491,6 +491,29 @@ router.get('/:identifier',(req,res)=>{
 ```
 
 
+#### 22.session,cookie,jwt(json web token)
+* http协议是一种无状态协议
+cookie是保存在浏览器端的;
+session是保存在服务器端的(注意session也是可以用cookie来存储的;session还是依赖于浏览器端的数据库的,比如cookie以及local storage)(每次请求带上用户的id)
+第一次登陆时候,服务器就响应一些信息比如说cookies;
+cookies是有长度限制的以及在分布式应用中有局限性的;
+简单理解就是cookies是浏览器的数据库;
+本地数据库有很多种,比如说本地存储Local Storage
+jwt可以用cookie存储也可以用local storage来存储
+
+* 一般而言就是cookies和session相互配合:
+cookie可以村部分的数据也是可以存储全部的数据;
+如果存储部分的数据,那么session可以在服务器端存到内存中也可以存到数据库中比如mysql,redis等;
+如果cookie存储的是全部的数据那么session充当的知知识一个计算的角色,知识将加密的cookies解密出来得到里面的数据内容
+
+
+* jwt(json web token)
+token就是一个串,是在服务器中加密的,根据秘钥进行对称加密;服务器端将信息根据秘钥进行对称加密之后再将这个串返回给浏览器;浏览器再将这个串记录起来保存到数据库中;之后每次浏览器发送请求的时候都要将这个串带过来;带到服务器中服务器再将这个串进行解密,得到其中的数据
+
+
+
+![Image text](https://github.com/smileyqp/loginReactApp/blob/master/README_PIC/local_database.png)
+
 
 ## 缕清整个项目前后台数据交互方式
 ### 前台请求发送部分

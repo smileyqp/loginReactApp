@@ -14,11 +14,12 @@ router.post('/',(req,res)=>{
     }).fetch().then( user => {
         if(user){
             if(bcrypt.compareSync(password,user.get('password_digest'))){//判断密码是否和数据库中返回的加密的密码解析之后相等
-                console.log('new');
+                
             }else{
                 res.status(401).json({errors:{form:'Invalid Credentials!Password is wrong!'}});//密码不匹配时候返回
             }
         }else{
+            //这个form是传过去显示login失败后的提示框的
             res.status(401).json({errors:{form:'Invalid Credentials!Username or email is invalid!'}});//username或者password不存在时候返回
         }
     })
