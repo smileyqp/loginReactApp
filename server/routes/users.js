@@ -38,19 +38,40 @@ const commonValidateInput=(data)=>{
 //validateInput返回的是一个Promise对象,因此就有then方法
 const validateInput = (data,otherValidations)=>{
     let {errors} = otherValidations(data);//这里是将commonValidateInput返回的errors传给这个errors;但是此处并没有将isValid这个变量传过来;是因为之后要到数据库中进行验证是否有重复;但是这两个isValid怎样进行和并呢???请待下回分解
-    return Promise.all([//这里是返回一个Promise对象,其中进入数据库进行查询是否有重复email和username;然后调用Promise的then方法,返回errors以及isValid
-        User.where({email:data.email}).fetch().then(user => {
-            if(user){errors.email = 'The email is existed! '}
-        }),
-        User.where({username:data.username}).fetch().then(user => {
-            if(user){errors.username = 'The username is existed! '}
-        })
-    ]).then(() => {
-        return{
+    return User.query({
+        where:{email:data.email},
+        orWhere:{username:data.username}
+    }).fetch().then(user=>{
+        if(user){
+            if(user.get('email') === data.email){
+                errors.email = 'The email is existed!';
+            }
+            if(user.get('username') === data.username){
+                errors.username = 'The username is existed!';
+            }
+        }
+        return {
             errors,
             isValid:isEmpty(errors)
         }
     })
+   
+   
+   
+    //这里是这个function中的第一种做法;上面是另外一种做法
+    // return Promise.all([//这里是返回一个Promise对象,其中进入数据库进行查询是否有重复email和username;然后调用Promise的then方法,返回errors以及isValid
+    //     User.where({email:data.email}).fetch().then(user => {
+    //         if(user){errors.email = 'The email is existed! '}
+    //     }),
+    //     User.where({username:data.username}).fetch().then(user => {
+    //         if(user){errors.username = 'The username is existed! '}
+    //     })
+    // ]).then(() => {
+    //     return{
+    //         errors,
+    //         isValid:isEmpty(errors)
+    //     }
+    // })
 }
 
 
