@@ -12,7 +12,8 @@ class SignupForm extends Component {
             password:'',
             passwordConfirmation:'',
             errors:{},
-            isLoading:false//避免重复提交
+            isLoading:false,//避免重复提交
+            invalid:false//当输入不合法的时候禁止提交
         }
     }
 
@@ -58,12 +59,15 @@ class SignupForm extends Component {
         if(val !== ''){
             this.props.isUserExists(val).then(res =>{
                 let errors = this.state.errors;
+                let invalid;
                 if(res.data.user){
                     errors[field] = 'There is user with such '+ field;
+                    invalid = true;
                 }else{
                     errors[field] = '';
+                    invalid = false;
                 }
-                this.setState({errors});
+                this.setState({errors,invalid});//设置state包括errors和invalid这个控制提交按钮的disabled
             })
         }
     }
@@ -105,7 +109,7 @@ class SignupForm extends Component {
 
 
             <div className='form-group'>
-                    <button disabled={this.state.isLoading} className='btn btn-primary lg'>Sign Up</button>
+                    <button disabled={this.state.isLoading||this.state.invalid } className='btn btn-primary lg'>Sign Up</button>
             </div>
       </form>
     );
