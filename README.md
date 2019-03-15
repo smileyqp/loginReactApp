@@ -434,12 +434,12 @@ select * from users;    //查看users中的所有数据
 
 
 
-#### 20.重复用户名邮件的时候返回给用户提示(详情见server/routes/user.js;以及可以对照dev分支上的修改前的源码)
+#### 20.重复用户名邮件的时候返回给用户提示(详情见server/routes/users.js;以及可以对照dev分支上的修改前的源码)
 
 ![Image text](https://github.com/smileyqp/loginReactApp/blob/master/README_PIC/repeated.png)
 
 ```shell
-//引入Promise的库
+//引入Promise的库;注意项目最终使用的方法中没有使用Promise而是改用另外一种方法,详情见server/routes/users.js中
 npm install bluebird --save
 //导入Promise
 import Promise from 'bluebird';

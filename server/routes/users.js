@@ -3,7 +3,7 @@ import isEmpty from 'lodash/isEmpty';
 import validator from 'validator'
 import User from '../models/user';
 import bcrypt from 'bcrypt';
-import Promise from 'bluebird';
+//import Promise from 'bluebird';
 
 let router = express.Router();
 
