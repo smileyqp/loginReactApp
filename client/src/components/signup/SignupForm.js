@@ -18,8 +18,8 @@ class SignupForm extends Component {
     }
 
     //第三种方法：取出历史记录；方便返回上一层；这个是取出上下文
-    // static propTypes = {
-    //     router:PropTypes.object
+    // static contextTypes = {
+    //     router:PropTypes.object.isRequired
     // }
     static propTypes = {
         userSignupRequest:PropTypes.func.isRequired,
@@ -86,27 +86,50 @@ class SignupForm extends Component {
             <h1>Join our community</h1>
             <div className='form-group'>
                 <label className='control-label'>Username</label>
-                <input value={this.state.username} type='text' name='username' onBlur = {this.checkUserExists} className={classnames('form-control',{'is-invalid':errors.username})} onChange={this.onChange}/>
+                <input 
+                    value={this.state.username} 
+                    type='text' 
+                    name='username' 
+                    onBlur = {this.checkUserExists} 
+                    className={classnames('form-control',{'is-invalid':errors.username})} 
+                    onChange={this.onChange}
+                />
                 {errors.username && <span className='form-text form-muted'>{errors.username}</span>}           
             </div>
             <div className='form-group'>
                 <label className='control-label'>Email</label>
-                <input value={this.state.email} type='email' name='email'onBlur = {this.checkUserExists} className={classnames('form-control',{'is-invalid':errors.email})} onChange={this.onChange}/>
+                <input 
+                    value={this.state.email} 
+                    type='email' 
+                    name='email'
+                    onBlur = {this.checkUserExists} 
+                    className={classnames('form-control',{'is-invalid':errors.email})} 
+                    onChange={this.onChange}
+                />
                 {errors.email && <span className='form-text form-muted'>{errors.email}</span>} 
             </div>
             <div className='form-group'>
                 <label className='control-label'>password</label>
-                <input value={this.state.password} type='password' name='password'className={classnames('form-control',{'is-invalid':errors.password})} onChange={this.onChange}/>
+                <input 
+                    value={this.state.password} 
+                    type='password' 
+                    name='password'
+                    className={classnames('form-control',{'is-invalid':errors.password})} 
+                    onChange={this.onChange}
+                />
                 {errors.password && <span className='form-text form-muted'>{errors.password}</span>} 
             </div>
             <div className='form-group'>
                 <label className='control-label'>password Confirmation</label>
-                <input value={this.state.passwordConfirmation} type='password' name='passwordConfirmation'className={classnames('form-control',{'is-invalid':errors.passwordConfirmation})} onChange={this.onChange}/>
+                <input 
+                    value={this.state.passwordConfirmation} 
+                    type='password' 
+                    name='passwordConfirmation'
+                    className={classnames('form-control',{'is-invalid':errors.passwordConfirmation})} 
+                    onChange={this.onChange}
+                />
                 {errors.passwordConfirmation && <span className='form-text form-muted'>{errors.passwordConfirmation}</span>} 
             </div>
-
-
-
 
             <div className='form-group'>
                     <button disabled={this.state.isLoading||this.state.invalid } className='btn btn-primary lg'>Sign Up</button>

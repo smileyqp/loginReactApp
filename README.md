@@ -59,7 +59,7 @@ bootstrap用到的样式网址：https://getbootstrap.com/docs/4.3/examples/navb
 npm install react-router-dom --save
 ```
 
-#### 6、安装axios用于post数据</br>
+#### 6、安装axios用于发送请求;post数据等</br>
 
 ```shell
 npm install axios
