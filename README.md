@@ -515,7 +515,7 @@ token就是一个串,是在服务器中加密的,根据秘钥进行对称加密;
 ![Image text](https://github.com/smileyqp/loginReactApp/blob/master/README_PIC/local_database.png)
 
 
-#### 22.jwt(json web token;具体使用见server/rouites/auth.js)
+#### 23.jwt(json web token;具体使用见server/rouites/auth.js)
 
 ```shell
 //安装
