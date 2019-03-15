@@ -1,4 +1,4 @@
-##### this version finished to register,including inserting datas to database;but it has not finished give users' the repeated prompts;
+##### this version finished to register,including inserting datas to database;but it has not finished give users the repeated prompts;
 
 # React&Redux+node.js+postgreSQL实现登录认证系统
 
