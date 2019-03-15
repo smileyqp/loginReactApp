@@ -24,6 +24,7 @@
     "bookshelf": "^0.14.2",
     "classnames": "^2.2.6",
     "express": "^4.16.4",
+    "jsonwebtoken": "^8.5.0",
     "knex": "^0.16.3",
     "lodash": "^4.17.11",
     "pg": "^7.8.2",
