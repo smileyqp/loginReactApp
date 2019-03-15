@@ -446,7 +446,7 @@ import Promise from 'bluebird';
 
 ```
 
-#### 21.服客户端唯一性验证:即输入框失焦时候触发onBlur时间,触发action给后台request查询数据库中是否已经存在username以及email如果存在返回user以及给用户提示
+#### 21.客户端唯一性验证:即输入框失焦时候触发onBlur时间,触发action给后台request查询数据库中是否已经存在username以及email如果存在返回user以及给用户提示
 
 ![Image text](https://github.com/smileyqp/loginReactApp/blob/master/README_PIC/onBlur.png)
 
