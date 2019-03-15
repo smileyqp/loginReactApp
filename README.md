@@ -452,6 +452,46 @@ import Promise from 'bluebird';
 
 ![Image text](https://github.com/smileyqp/loginReactApp/blob/master/README_PIC/onBlur_new.png)
 
+```shell
+//1.给输入框添加onBlur事件以及写其触发的checkUserExists方法
+checkUserExists = (e) => {
+    const field = e.target.name;
+    const val = e.target.value;
+    if(val !== ''){
+        this.props.isUserExists(val).then(res =>{
+            let errors = this.state.errors;
+            if(res.data.user){
+                errors[field] = 'There is user with such '+ field;
+            }else{
+                errors[field] = '';
+            }
+            this.setState({errors});
+        })
+    }
+}
+
+//2.action(signupAction)添加isUserExists方法用于异步分发;注意在checkUserExists中触发isUserExists方法注意isUserExists方法的引入
+export const isUserExists = (identifier) =>{
+    return dispatch =>{
+        return axios.get(`/api/users/${identifier}`,identifier)
+    }
+}
+
+//3.在server处匹配路由在server/routes/users.js中;注意这边dispatch过去是get方法;那边接收也是get方法;然后对其进行数据库查询等处理
+router.get('/:identifier',(req,res)=>{
+    User.query({
+        select:['username','email'],
+        where:{email:req.params.identifier},
+        orWhere:{username:req.params.identifier}
+    }).fetch().then(user => {
+        res.json({user});
+    })
+})
+
+```
+
+
+
 ## 缕清整个项目前后台数据交互方式
 ### 前台请求发送部分
 *  在SignupForm中。用state对象存储username、email、password、passwordConfirm等信息</br>

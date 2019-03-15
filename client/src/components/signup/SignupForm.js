@@ -52,7 +52,7 @@ class SignupForm extends Component {
 
     //onBlur是失焦时候触发;为了验证username的唯一性;在视角的时候就进行客户端唯一性验证而不是提交之后才验证是否username和email唯一
     checkUserExists = (e) => {
-        console.log('onBlur');
+        // console.log('onBlur');
         const field = e.target.name;
         const val = e.target.value;
         if(val !== ''){
