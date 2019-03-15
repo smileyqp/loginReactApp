@@ -434,7 +434,7 @@ select * from users;    //查看users中的所有数据
 
 
 
-#### 20.重复用户名邮件的时候返回给用户提示(详情见server/routes/users.js;以及可以对照dev分支上的修改前的源码)
+#### 20.服务器端唯一性验证:重复用户名邮件的时候返回给用户提示(详情见server/routes/users.js;以及可以对照dev分支上的修改前的源码)
 
 ![Image text](https://github.com/smileyqp/loginReactApp/blob/master/README_PIC/repeated.png)
 
@@ -446,8 +446,9 @@ import Promise from 'bluebird';
 
 ```
 
+#### 21.服客户端唯一性验证:即输入框失焦时候触发onBlur时间,触发action给后台request查询数据库中是否已经存在username以及email如果存在返回user以及给用户提示
 
-
+![Image text](https://github.com/smileyqp/loginReactApp/blob/master/README_PIC/onBlur.png)
 
 ## 缕清整个项目前后台数据交互方式
 ### 前台请求发送部分
