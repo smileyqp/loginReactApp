@@ -434,6 +434,20 @@ select * from users;    //查看users中的所有数据
 ![Image text](https://github.com/smileyqp/loginReactApp/blob/master/README_PIC/registed_data.png)
 
 
+
+#### 20.重复用户名邮件的时候返回给用户提示(详情见server/routes/user.js;以及可以对照dev分支上的修改前的源码)
+
+```shell
+//引入Promise的库
+npm install bluebird --save
+//导入Promise
+import Promise from 'bluebird';
+
+```
+
+
+
+
 ## 缕清整个项目前后台数据交互方式
 ### 前台请求发送部分
 *  在SignupForm中。用state对象存储username、email、password、passwordConfirm等信息</br>

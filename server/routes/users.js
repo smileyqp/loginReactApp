@@ -3,6 +3,7 @@ import isEmpty from 'lodash/isEmpty';
 import validator from 'validator'
 import User from '../models/user';
 import bcrypt from 'bcrypt';
+import Promise from 'bluebird';
 
 let router = express.Router();
 
@@ -34,17 +35,29 @@ const commonValidateInput=(data)=>{
     }
 }
 
-
+//validateInput返回的是一个Promise对象,因此就有then方法
 const validateInput = (data,otherValidations)=>{
-    let {errors} = otherValidations(data);
-    return Promise;
+    let {errors} = otherValidations(data);//这里是将commonValidateInput返回的errors传给这个errors;但是此处并没有将isValid这个变量传过来;是因为之后要到数据库中进行验证是否有重复;但是这两个isValid怎样进行和并呢???请待下回分解
+    return Promise.all([
+        User.where({email:data.email}).fetch().then(user => {
+            if(user){errors.email = 'The user with such email! '}
+        }),
+        User.where({username:data.username}).fetch().then(user => {
+            if(user){errors.username = 'The username is existed! '}
+        })
+    ]).then(() => {
+        return{
+            errors,
+            isValid:isEmpty(errors)
+        }
+    })
 }
 
 
 router.post('/',(req,res)=>{
     // setTimeout(()=>{},500);
     //console.log(req.body);
-    const {errors,isValid} = validateInput(req.body,commonValidateInput).then(({errors,isvalid})=>{
+    validateInput(req.body,commonValidateInput).then(({errors,isValid})=>{
         if(isValid){
             const {username,password,email} = req.body;
             const password_digest = bcrypt.hashSync(password,10);//用bcrypt加密,哈希加密并且长度为10
