@@ -22,7 +22,8 @@ class SignupForm extends Component {
     // }
     static propTypes = {
         userSignupRequest:PropTypes.func.isRequired,
-        addFlashMessage:PropTypes.func.isRequired//addFlashMessage是从reducer中传过来的；这里是进行验证
+        addFlashMessage:PropTypes.func.isRequired,//addFlashMessage是从reducer中传过来的；这里是进行验证
+        isUserExists:PropTypes.func.isRequired
     }
     onChange = (e) =>{
         this.setState({[e.target.name]:e.target.value});
@@ -47,6 +48,31 @@ class SignupForm extends Component {
             //(data) => {console.dir(data)}
         );
     }
+
+
+    //onBlur是失焦时候触发;为了验证username的唯一性;在视角的时候就进行客户端唯一性验证而不是提交之后才验证是否username和email唯一
+    checkUserExists = (e) => {
+        console.log('onBlur');
+        const field = e.target.name;
+        const val = e.target.value;
+        if(val !== ''){
+            this.props.isUserExists(val).then(res =>{
+                let errors = this.state.errors;
+                if(res.data.user){
+                    errors[field] = 'There is user with such '+ field;
+                }else{
+                    errors[field] = '';
+                }
+                this.setState({errors});
+            })
+        }
+    }
+
+
+
+
+
+
 //{errors.username && <span className='form-text form-muted'>{errors.username}</span>}解释
 //前面的errors.username相当于一个判断；当errors.username存在时候相当于true才会将后面的内容显示出来；其他的也一样   
   render() {
@@ -56,12 +82,12 @@ class SignupForm extends Component {
             <h1>Join our community</h1>
             <div className='form-group'>
                 <label className='control-label'>Username</label>
-                <input value={this.state.username} type='text' name='username'className={classnames('form-control',{'is-invalid':errors.username})} onChange={this.onChange}/>
+                <input value={this.state.username} type='text' name='username' onBlur = {this.checkUserExists} className={classnames('form-control',{'is-invalid':errors.username})} onChange={this.onChange}/>
                 {errors.username && <span className='form-text form-muted'>{errors.username}</span>}           
             </div>
             <div className='form-group'>
                 <label className='control-label'>Email</label>
-                <input value={this.state.email} type='email' name='email'className={classnames('form-control',{'is-invalid':errors.email})} onChange={this.onChange}/>
+                <input value={this.state.email} type='email' name='email'onBlur = {this.checkUserExists} className={classnames('form-control',{'is-invalid':errors.email})} onChange={this.onChange}/>
                 {errors.email && <span className='form-text form-muted'>{errors.email}</span>} 
             </div>
             <div className='form-group'>

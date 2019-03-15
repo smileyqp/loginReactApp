@@ -54,10 +54,7 @@ const validateInput = (data,otherValidations)=>{
             errors,
             isValid:isEmpty(errors)
         }
-    })
-   
-   
-   
+    }) 
     //这里是这个function中的第一种做法;上面是另外一种做法
     // return Promise.all([//这里是返回一个Promise对象,其中进入数据库进行查询是否有重复email和username;然后调用Promise的then方法,返回errors以及isValid
     //     User.where({email:data.email}).fetch().then(user => {
@@ -73,6 +70,17 @@ const validateInput = (data,otherValidations)=>{
     //     }
     // })
 }
+
+
+router.get('/:identifier',(req,res)=>{
+    User.query({
+        select:['username','email'],
+        where:{email:req.params.identifier},
+        orWhere:{username:req.params.identifier}
+    }).fetch().then(user => {
+        res.json({user});
+    })
+})
 
 
 router.post('/',(req,res)=>{
