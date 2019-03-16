@@ -575,16 +575,19 @@ const {isAuthenticated,user} = this.props.auth;
 
 #### 27.实现用户登出
 
+给logout这个button添加logout这个时间;这个事件中的logout调用引用的actions/authActions.js中的logout事件;并进行一些列操作:
+
+* 1.清除浏览器中的localStorage中的jwtToken
+* 2.清楚请求时候头部headers中的认证;这个在前面几点中有设置的
+* 3.调用方法将当前用户设置成空并且将登录状态设置成空
+
 ```shell
 //给log out添加事件
  logout = (e) => {
     e.preventDefault();
     this.props.logout();
 }
-//这个事件中的logout调用引用的actions/authActions.js中的logout事件;并进行一些列操作:
-//1.清除浏览器中的localStorage中的jwtToken
-//2.清楚请求时候头部headers中的认证;这个在前面几点中有设置的
-//3.调用方法将当前用户设置成空并且将登录状态设置成空
+
 export const logout = () => {
     return dispatch => {
         localStorage.removeItem('jwtToken');//清除浏览器的localStorage中的jwtToken;
