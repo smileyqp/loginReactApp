@@ -573,6 +573,30 @@ static propTypes = {
 const {isAuthenticated,user} = this.props.auth;
 ```
 
+#### 27.实现用户登出
+
+```shell
+//给log out添加事件
+ logout = (e) => {
+    e.preventDefault();
+    this.props.logout();
+}
+//这个事件中的logout调用引用的actions/authActions.js中的logout事件;并进行一些列操作:
+//1.清除浏览器中的localStorage中的jwtToken
+//2.清楚请求时候头部headers中的认证;这个在前面几点中有设置的
+//3.调用方法将当前用户设置成空并且将登录状态设置成空
+export const logout = () => {
+    return dispatch => {
+        localStorage.removeItem('jwtToken');//清除浏览器的localStorage中的jwtToken;
+        setAuthorizationToken(false);//这里是将头部的认证信息Authorization删除,以后不带上头部认证信息
+        dispatch(setCurrentUser({}));//传入一个空对象;
+    }
+}
+
+
+```
+
+
 ## 缕清整个项目前后台数据交互方式
 ### 前台请求发送部分
 *  在SignupForm中。用state对象存储username、email、password、passwordConfirm等信息</br>
