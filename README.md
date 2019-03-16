@@ -553,6 +553,26 @@ if(localStorage.jwtToken){
 ```
 
 
+
+#### 26.实现用户登录,登录状态控制显示(登录状态显示注销按钮)
+
+```shell
+//在NavigationBar.js这个页面引入connnect并且取得state中的auth
+const mapStateToProps = (state) => {
+    //console.log(state);//可以先打印出来再看怎么取得
+    return {
+        auth:state.auth//这个是在reducer中的index中定义的
+
+    }
+}
+//PropTypes进行验证数据,然后render中取得数据
+static propTypes = {
+    auth:PropTypes.object.isRequired
+}
+//render中取得isAuthenticated标示用户登录的一个状态;user是当时从token中解析的一个用户数据对象;
+const {isAuthenticated,user} = this.props.auth;
+```
+
 ## 缕清整个项目前后台数据交互方式
 ### 前台请求发送部分
 *  在SignupForm中。用state对象存储username、email、password、passwordConfirm等信息</br>
