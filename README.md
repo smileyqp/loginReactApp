@@ -546,7 +546,7 @@ jwtDecode(token)//这一句是进行token的jwt解析的,即系出来的数据�
 dispatch(setCurrentUser(jwtDecode(token)));
 2.在reducer中的auth.js收到这个消息之后,改变state中的值isAuthenticated改为true即用户登录状态,将初始化的user状态改为token中传过去的user对象
 3.为了保证刷新的时候登录状态不丢失,在index.js中,进行判断是否localstorage中有jwtToken,如果有这个token再dispatch给reducer
-if(localStorage.jwtToken){//如果localStorage中存在这个jwtToken
+if(localStorage.jwtToken){
     setAuthorizationToken(localStorage.jwtToken);
     store.dispatch(setCurrentUser(jwtDecode(localStorage.jwtToken)));
 }
