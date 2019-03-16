@@ -7,7 +7,7 @@ export const login = (data) => {
             const token = res.data.token;
 
             localStorage.setItem('jwtToken',token);//将传过来的值放进localStorage中;localStorage是一个键值对的;前面的jwtToken这个可以自定义;localStorage这个对象是浏览器自带的不用导入
-            setAuthorization(token);
+            setAuthorization(token);//将res的传过来的token放进请求头
         });
     }
 }

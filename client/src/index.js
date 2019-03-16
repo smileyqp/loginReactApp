@@ -18,6 +18,8 @@ import rootReducers from './reducers';
 
 import {Provider} from 'react-redux';
 
+import setAuthorizationToken from './utils/setAuthorizationToken';
+
 
 const store = createStore(
     rootReducers,
@@ -25,6 +27,8 @@ const store = createStore(
         applyMiddleware(thunk,logger),
     )
 );
+
+setAuthorizationToken(localStorage.jwtToken);//将浏览器的localStorage中的jwtToken取出来;在开始页面加载的饿时候调用这个方法将jwtToken放置到请求头里面,防止刷新的时候没有
 
 ReactDOM.render(
     <Provider store = {store}>
