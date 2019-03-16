@@ -21,7 +21,7 @@ import {Provider} from 'react-redux';
 import setAuthorizationToken from './utils/setAuthorizationToken';
 
 import jwtDecode from 'jwt-decode';//接到server端传过来的token之后前段进行解码
-import {setCurrentUser} from './actions/loginActions'
+import {setCurrentUser} from './actions/authActions'
 
 
 
@@ -35,7 +35,7 @@ const store = createStore(
 
 if(localStorage.jwtToken){//如果localStorage中存在这个jwtToken
     setAuthorizationToken(localStorage.jwtToken);//将浏览器的localStorage中的jwtToken取出来;在开始页面加载的时候调用这个方法将jwtToken放置到请求头里面,防止刷新的时候没有
-    store.dispatch(setCurrentUser(jwtDecode(localStorage.jwtToken)));//见loginAction中;这里的作用是当页面刷新时候,如果本地存储有token即用户已经处于一个登录的状态的时候,保持reducer中的值即保持登录状态
+    store.dispatch(setCurrentUser(jwtDecode(localStorage.jwtToken)));//这里需要用store见loginAction中;这里的作用是当页面刷新时候,如果本地存储有token即用户已经处于一个登录的状态的时候,保持reducer中的值即保持登录状态
 
 }
 

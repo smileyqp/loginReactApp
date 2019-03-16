@@ -3,7 +3,7 @@ import classnames from 'classnames';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import validateInput from '../../utils/validations/login';//这个是写的login验证的工具
-import {login} from '../../actions/loginActions';
+import {login} from '../../actions/authActions';
 
 class LoginForm extends Component{
     constructor(props){

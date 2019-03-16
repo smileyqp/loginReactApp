@@ -3,19 +3,28 @@ import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';//类型检查库
+import {logout} from '../actions/authActions';
+
 
 class NavigationBar extends Component {
     static propTypes = {
-        auth:PropTypes.object.isRequired
+        auth:PropTypes.object.isRequired,
+        logout:PropTypes.func.isRequired
     }
    
+    //做用户logout实际上就是将reducer中的state即auth的isAuthenticated改为false以及user改为{}
+    logout = (e) => {
+        e.preventDefault();//默认行为;保证其不会跳转
+        this.props.logout();//这个是从外面传过来的函数
+    }
+
     render() {
         const {isAuthenticated,user} = this.props.auth;//取出isAuthenticated和user这两个,一个用于判断用户是否已经登录;另外一个可以用于显示用户名
 
         const userLinks = (
             <ul className="navbar-nav mr-auto">
                 <li className="nav-item">
-                    <Link className="nav-link" to="/signup">{user.username}  Logout</Link>
+                    <a className="nav-link" onClick = {this.logout}>{user.username}  Logout</a>
                 </li>
             </ul>
         );
@@ -25,7 +34,11 @@ class NavigationBar extends Component {
                 <li className="nav-item">
                     <Link className="nav-link" to="/signup">Sign Up</Link>
                 </li>
+                <li className="nav-item">
+                    <Link className="nav-link" to="/login">Login</Link>
+                </li>
             </ul>
+            
         );
         return (
             <nav className="navbar navbar-expand-lg navbar-light bg-light mb-3">
@@ -53,7 +66,7 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps)(NavigationBar);
+export default connect(mapStateToProps,{logout})(NavigationBar);
 
 
 
