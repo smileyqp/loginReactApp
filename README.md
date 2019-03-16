@@ -534,6 +534,14 @@ import jwt from 'jsonwebtoken';
 * 3.用户请求的loginAction.js中返回server端的数据取得这个server端传过来的token值;此时客户端首先将这个token存入localstorage(用键值对存储;此处取得名字叫做jwtToken)中,之后由于每次客户端向服务器请求都要带上这个token,因此要将这个toen放进请求头中,于是在返回这个token之后将其放入请求头,并且为了放置每次刷新失效于是在整个项目的index.js中调用utils中的setAuthorization方法,讲话token在页面刷新的时候就将其从localstoeage中取出来然后放进请求头中,这样只要localstorage中存在这个token那么其就会在这个用户每次进行请求的时候得到
 
 #### 25.客户端解析token,并将用户信息保存到reducer中;并且在index页面做处理,让用户及时刷新页面也不丢失登录状态 (详情见loginActions.js)
+
+步骤:
+
+* client客户端接收到server端传过来的成功用户验证后,用dispatch分发给reducer
+dispatch(setCurrentUser(jwtDecode(token)));
+* 在reducer中的auth.js收到这个消息之后,改变state中的值isAuthenticated改为true即用户登录状态,将初始化的user状态改为token中传过去的user对象
+* 为了保证刷新的时候登录状态不丢失,在index.js中,进行判断是否localstorage中有jwtToken,如果有这个token再dispatch给reducer
+
 ```shell
 npm install jwt-token
 
@@ -541,18 +549,12 @@ import jwtDecode from 'jwt-decode';
 
 jwtDecode(token)//这一句是进行token的jwt解析的,即系出来的数据就是server传给客户端的
 
-步骤:
-1.client客户端接收到server端传过来的成功用户验证后,用dispatch分发给reducer
-dispatch(setCurrentUser(jwtDecode(token)));
-2.在reducer中的auth.js收到这个消息之后,改变state中的值isAuthenticated改为true即用户登录状态,将初始化的user状态改为token中传过去的user对象
-3.为了保证刷新的时候登录状态不丢失,在index.js中,进行判断是否localstorage中有jwtToken,如果有这个token再dispatch给reducer
+
 if(localStorage.jwtToken){
     setAuthorizationToken(localStorage.jwtToken);
     store.dispatch(setCurrentUser(jwtDecode(localStorage.jwtToken)));
 }
 ```
-
-
 
 #### 26.实现用户登录,登录状态控制显示(登录状态显示注销按钮)
 
