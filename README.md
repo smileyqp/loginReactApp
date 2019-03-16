@@ -526,17 +526,21 @@ jwt由三部分组成header,payload,signature(头部,载荷和签名)
 import jwt from 'jsonwebtoken';
 ```
 
-```shell
-//将token保存到header中
-1.浏览器端点击登录按钮,触发loginaction事件,dispatch往server端发送request请求
-2.server端接收到请求,匹配路由auth;之后进入数据库中进行查询,看是否数据库中华存在该用户;
+#### 24.将token存到localstorage并保存到header中
+* 1.浏览器端点击登录按钮,触发loginaction事件,dispatch往server端发送request请求
+* 2.server端接收到请求,匹配路由auth;之后进入数据库中进行查询,看是否数据库中华存在该用户;
 不存在,返回一个401错误给客户端并且带上form信息用于返回给用户提示哪里错误;
 如果该用户存在,那么引入jwt库,返回给用户一个进行加密之后的token(具体见server/routes/auth.js);
-3.用户请求的loginAction.js中返回server端的数据取得这个server端传过来的token值;此时客户端首先将这个token存入localstorage(用键值对存储;此处取得名字叫做jwtToken)中,之后由于每次客户端向服务器请求都要带上这个token,因此要将这个toen放进请求头中,于是在返回这个token之后将其放入请求头,并且为了放置每次刷新失效于是在整个项目的index.js中调用utils中的setAuthorization方法,讲话token在页面刷新的时候就将其从localstoeage中取出来然后放进请求头中,这样只要localstorage中存在这个token那么其就会在这个用户每次进行请求的时候得到
+* 3.用户请求的loginAction.js中返回server端的数据取得这个server端传过来的token值;此时客户端首先将这个token存入localstorage(用键值对存储;此处取得名字叫做jwtToken)中,之后由于每次客户端向服务器请求都要带上这个token,因此要将这个toen放进请求头中,于是在返回这个token之后将其放入请求头,并且为了放置每次刷新失效于是在整个项目的index.js中调用utils中的setAuthorization方法,讲话token在页面刷新的时候就将其从localstoeage中取出来然后放进请求头中,这样只要localstorage中存在这个token那么其就会在这个用户每次进行请求的时候得到
 
+#### 25.客户端解析token (详情见loginActions.js)
+```shell
+npm install jwt-token
 
+import jwtDecode from 'jwt-decode';
 
-```
+jwtDecode(token)
+1```
 
 
 ## 缕清整个项目前后台数据交互方式

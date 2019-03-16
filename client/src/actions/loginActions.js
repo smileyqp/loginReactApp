@@ -1,5 +1,17 @@
 import axios from 'axios';
-import setAuthorization from '../utils/setAuthorizationToken'
+import setAuthorization from '../utils/setAuthorizationToken';
+import jwtDecode from 'jwt-decode';//接到server端传过来的token之后前段进行解码
+import {SET_CURRENT_USER} from '../constants';
+
+export const setCurrentUser = (user) => {//直接到reducer中的auth.js
+    return {
+        type:SET_CURRENT_USER,
+        user
+    }
+
+}
+
+
 
 export const login = (data) => {
     return dispatch =>{
@@ -8,6 +20,8 @@ export const login = (data) => {
 
             localStorage.setItem('jwtToken',token);//将传过来的值放进localStorage中;localStorage是一个键值对的;前面的jwtToken这个可以自定义;localStorage这个对象是浏览器自带的不用导入
             setAuthorization(token);//将res的传过来的token放进请求头
+            //console.log(jwtDecode(token));//这样可以将payload中的内容解析出来;解析得到的欧式server当时传过来的token中的json数据内容
+            dispatch(setCurrentUser(jwtDecode(token)));//调用上面的一个方法setCurrentUser
         });
     }
 }
