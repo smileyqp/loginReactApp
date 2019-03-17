@@ -604,7 +604,7 @@ export const logout = () => {
 #### 27.实现用户登录才有权限操作
 
 步骤(http://localhost:3000/new-event页面):
-* 1\用户进入new-event页面;点击create这个按钮触发事件即eventAction中的createEvent,这个function将state带去请求'/api/events'这个url
+* 用户进入new-event页面;点击create这个按钮触发事件即eventAction中的createEvent,这个function将state带去请求'/api/events'这个url
 * 后台server端接收到了请求,在匹配到路由'/api/events';在进行返回res之前进行中间件authenticate中的操作
 
 ```shell
