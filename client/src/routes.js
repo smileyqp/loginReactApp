@@ -6,12 +6,13 @@ import SignupPage from './components/signup/SignupPage';
 import LoginPage from './components/login/LoginPage';
 import NewEventPage from './components/events/NewEventPage';
 
+import requireAuth from './utils/requireAuth';
 //exact是'/'的路由包含了下面的其他路由因此要只是让一个显示要加上这个
 export default(
     <div className='container'>
         <Route exact path='/' component={ App }/>
         <Route path='/signup' component={ SignupPage }/>
         <Route path='/login' component={ LoginPage }/>
-        <Route path='/new-event' component={ NewEventPage }/>
+        <Route path='/new-event' component={ requireAuth(NewEventPage) }/>
     </div>
 );
