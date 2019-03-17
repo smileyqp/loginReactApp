@@ -601,6 +601,66 @@ export const logout = () => {
 
 
 ```
+#### 27.实现用户登录才有权限操作
+
+步骤(http://localhost:3000/new-event页面):
+* 1\用户进入new-event页面;点击create这个按钮触发事件即eventAction中的createEvent,这个function将state带去请求'/api/events'这个url
+* 后台server端接收到了请求,在匹配到路由'/api/events';在进行返回res之前进行中间件authenticate中的操作
+
+```shell
+router.post('/',authenticate,(req,res)=>{
+    res.status(201).json({user:req.currentUser});
+});
+```
+
+* 中间件中,取得请求头部并且取出里面的token;并且对token进行解析,对其解析出来的进行分支判断返回给用户信息;如果数据库中成功查询到了这个人,就返回该用户的信息;执行完中间件之后在进入events,将请求res传给用户
+
+```shell
+    const authorizationHeader = req.headers['authorization'];//请求头部
+    let token;
+    if(authorizationHeader){
+        token = authorizationHeader.split(' ')[1];
+    }
+
+
+     if(token){//如果取到token
+        jwt.verify(token,config.jwtSecret,(err,decoded) => {    //解析token进行判断
+            if(err){
+                res.status(401).json({error:'Fali to authenticate'});
+            }else{
+                //console.log(decoded);
+                // new User({id:decoded.id}).fetch().then(user => {    //如果config中秘钥验证通过;从数据库中去找数据
+                //     if(!user){
+                //         res.status(404).json({error:'No such user'});
+                //     }
+                //     req.currentUser = user;
+                //     next();
+                // })
+
+ 
+                User.query({
+                    where: { id: decoded.id },
+                    select: [ 'email', 'id', 'username' ]
+                }).fetch().then(user => {
+                  if (!user) {
+                    res.status(404).json({ error: 'No such user' });
+                  }      
+                  req.currentUser = user;
+                  next();
+                })
+            }
+        })
+    }else{
+        res.status(403).json({
+            error:'No token provided'
+        });
+    }
+
+```
+
+
+
+
 
 
 ## 缕清整个项目前后台数据交互方式
