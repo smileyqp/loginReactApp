@@ -38,10 +38,13 @@ export default (req,res,next) => {
                 }).fetch().then(user => {
                   if (!user) {
                     res.status(404).json({ error: 'No such user' });
+                  } else{
+                    req.currentUser = user;//这里将数据库中user信息取出来赋值给currentUser,然后在event中返回给用户res
+                    next();
+
                   }
         
-                  req.currentUser = user;//这里将数据库中user信息取出来赋值给currentUser,然后在event中返回给用户res
-                  next();
+                  
                 })
             }
         })

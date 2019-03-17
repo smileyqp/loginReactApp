@@ -599,9 +599,9 @@ export const logout = () => {
     }
 }
 
-
 ```
-#### 27.实现用户登录才有权限操作
+
+#### 28.实现用户登录才有权限操作
 
 步骤(http://localhost:3000/new-event页面):
 * 用户进入new-event页面;点击create这个按钮触发事件即eventAction中的createEvent,这个function将state带去请求'/api/events'这个url
@@ -658,6 +658,64 @@ router.post('/',authenticate,(req,res)=>{
 
 ```
 ![Image text](https://github.com/smileyqp/loginReactApp/blob/master/README_PIC/limit_operation.png)
+
+
+
+#### 29.实现用户登录才能进入某个页面
+
+```shell
+//在client的routes.js中引入requireAuth;并给要登录才能访问的页面加上
+<Route path='/new-event' component={ requireAuth(NewEventPage) }/>
+
+
+
+//这个是requireAuth.js中定义一个高阶组件的操作
+
+export default function (ComposedComponent){
+    class Authenticate extends Component{
+        componentWillMount(){
+            if(!this.props.isAuthenticated){
+                this.props.addFlashMessage({
+                    type:'danger',
+                    text:'You need to login to access this page!'
+                });
+                this.context.router.history.push('/');
+            }
+        }
+        componentWillUpdate(nextProps){
+            if(!nextProps.isAuthenticated){
+                this.context.router.history.push('/');
+            }
+        }
+        render(){
+            return (
+            <ComposedComponent {...this.props}/>
+            )
+        }
+    }
+
+    Authenticate.protoType = {
+        isAuthenticated:PropTypes.bool.isRequired,
+        addFlashMessage:PropTypes.func.isRequired
+    }
+
+    Authenticate.contextTypes = {
+        router:PropTypes.object.isRequired
+    }
+
+    const mapStateToProps = (state) => {
+        return {
+            isAuthenticated:state.auth.isAuthenticated
+        }
+    }
+
+    return connect(mapStateToProps,{addFlashMessage})(Authenticate);
+
+}
+
+
+
+```
 
 
 
