@@ -10,7 +10,7 @@
 ```
 
 nodemon是为了前端刷新时候实时刷新不用重启的一个配置</br>
-fork运行执行 ...是ES6的展开运算符
+fork运行执行(立即执行) ...是ES6的展开运算符
 </br>
 ![Image text](https://github.com/smileyqp/loginReactApp/blob/master/README_PIC/login.png)
 
