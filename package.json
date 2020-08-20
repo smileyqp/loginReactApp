@@ -18,7 +18,7 @@
   },
   "homepage": "https://github.com/smileyqp/redux_loginRegister_frame#readme",
   "dependencies": {
-    "bcrypt": "^3.0.4",
+    "bcrypt": "^5.0.0",
     "bluebird": "^3.5.3",
     "body-parser": "^1.18.3",
     "bookshelf": "^0.14.2",
